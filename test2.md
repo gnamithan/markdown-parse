@@ -1,0 +1,1 @@
+[link](someLink.html)
