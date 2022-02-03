@@ -14,28 +14,20 @@ public class MarkdownParse {
         while(currentIndex < markdown.length()) {
             int nextOpenBracket = markdown.indexOf("[", currentIndex);
             
-            // System.out.println("Value of current index before loop: " + currentIndex);
+            System.out.println("Value of current index before loop: " + currentIndex);
             int nextCloseBracket = markdown.indexOf("]", nextOpenBracket);
             int openParen = markdown.indexOf("(", nextCloseBracket);
             int closeParen = markdown.indexOf(")", openParen);
 
-            if(pastCloseParen == closeParen || nextOpenBracket == -1) {
+            if(pastCloseParen == closeParen) {
                 break;
             }
             pastCloseParen = closeParen;
-            
-            // System.out.println("Index of next open bracket: " + nextOpenBracket);
-            // System.out.println("Index of next open bracket - 1: " + (nextOpenBracket - 1));
-            if(nextOpenBracket != 0) {
-                if(!markdown.substring(nextOpenBracket-1, nextOpenBracket).equals("!")){
-                    toReturn.add(markdown.substring(openParen + 1, closeParen));
-                }
-                currentIndex = closeParen + 1;
-            } else {
+            if(!markdown.substring(nextOpenBracket-1, nextOpenBracket).equals("!")){
                 toReturn.add(markdown.substring(openParen + 1, closeParen));
-                currentIndex = closeParen + 1;
             }
-            // System.out.println("Value of current index after loop: " + currentIndex);
+            currentIndex = closeParen + 1;
+            System.out.println("Value of current index after loop: " + currentIndex);
         }
         return toReturn;
     }
