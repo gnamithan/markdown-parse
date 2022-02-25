@@ -14,18 +14,22 @@ public class MarkdownParseTest {
     public void addition() throws IOException {
         // assertEquals(2, 1 + 1);
 
-        String contentsTest = Files.readString(Path.of("test-file.md"));
+        //String contentsTest = Files.readString(Path.of("test-file.md"));
         String contentsTest1 = Files.readString(Path.of("test1.md"));
-        String contentsTest2 = Files.readString(Path.of("test2.md"));
-        String contentsTest3 = Files.readString(Path.of("test3.md"));
+        //String contentsTest2 = Files.readString(Path.of("test2.md"));
+        //String contentsTest3 = Files.readString(Path.of("test3.md"));
 
-        assertEquals(List.of("https://something.com", "some-page.html"), 
-            MarkdownParse.getLinks(contentsTest));
-        assertEquals(List.of("https://something.com"), 
+       // assertEquals(List.of("https://something.com", "some-page.html"), 
+            //MarkdownParse.getLinks(contentsTest));
+        //assertEquals(List.of("https://something.com"), 
+            //MarkdownParse.getLinks(contentsTest1));
+        //assertEquals(List.of("someLink.html"), 
+            //MarkdownParse.getLinks(contentsTest2));
+       // assertEquals(List.of("someLink.html"), 
+           // MarkdownParse.getLinks(contentsTest3));
+        assertEquals(List.of("[a link](url.com)", "another link`", "cod[e" , "code]"), 
             MarkdownParse.getLinks(contentsTest1));
-        assertEquals(List.of("someLink.html"), 
-            MarkdownParse.getLinks(contentsTest2));
-        assertEquals(List.of("someLink.html"), 
-            MarkdownParse.getLinks(contentsTest3));
+        //assertEquals(List.of("[a nested link](b.com)", "a nested parenthesized url", "some escaped [ brackets ]"), 
+            //MarkdownParse.getLinks(contentsTest2));
     }
 }
