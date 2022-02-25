@@ -11,16 +11,29 @@ import java.util.List;
 //java -cp .:lib/junit-4.13.2.jar:lib/hamcrest-core-1.3.jar org.junit.runner.JUnitCore MarkdownParseTest
 public class MarkdownParseTest {
     @Test
+    public void testFile1() throws IOException {
+        String contentsTest2 = Files.readString(Path.of("test2.md"));
+        assertEquals(List.of("[a nested link](b.com)", "a nested parenthesized url", "some escaped [ brackets ]"), 
+            MarkdownParse.getLinks(contentsTest2));
+    }
+
+
+
+
+
+
+
+    @Test
     public void addition() throws IOException {
         // assertEquals(2, 1 + 1);
 
         //String contentsTest = Files.readString(Path.of("test-file.md"));
-        String contentsTest1 = Files.readString(Path.of("test1.md"));
+        //String contentsTest1 = Files.readString(Path.of("test1.md"));
         //String contentsTest2 = Files.readString(Path.of("test2.md"));
         //String contentsTest3 = Files.readString(Path.of("test3.md"));
 
-        assertEquals(List.of("[a link](url.com)", "another link`", "cod[e" , "code]"), 
-            MarkdownParse.getLinks(contentsTest1));
+        //assertEquals(List.of("[a link](url.com)", "another link`", "cod[e" , "code]"), 
+            //MarkdownParse.getLinks(contentsTest1));
         /* assertEquals(List.of("[a nested link](b.com)", "a nested parenthesized url", "some escaped [ brackets ]"), 
             MarkdownParse.getLinks(contentsTest2));
         assertEquals(List.of("[this title text is really long and takes up more than one line", 
