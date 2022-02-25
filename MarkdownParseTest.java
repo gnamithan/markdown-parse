@@ -12,9 +12,16 @@ import java.util.List;
 public class MarkdownParseTest {
     @Test
     public void testFile1() throws IOException {
-        String contentsTest2 = Files.readString(Path.of("test2.md"));
-        assertEquals(List.of("[a nested link](b.com)", "a nested parenthesized url", "some escaped [ brackets ]"), 
-            MarkdownParse.getLinks(contentsTest2));
+        String contentsTest3 = Files.readString(Path.of("test3.md"));
+        assertEquals(List.of("[this title text is really long and takes up more than one line", 
+                    "and has some line breaks]( https://www.twitter.com )",
+                     "this title text is really long and takes up more than one line",
+                     "[this link doesn't have a closing parenthesis](github.com",
+                     "And there's still some more text after that.",
+                     "[this link doesn't have a closing parenthesis for a while](https://cse.ucsd.edu/",
+                      ")",
+                     "And then there's more text"), 
+            MarkdownParse.getLinks(contentsTest3));
     }
 
 
