@@ -74,7 +74,6 @@ public class MarkdownParse {
             String potentialLink = markdown.substring(openParen + 1, closeParen).trim();
             if(potentialLink.indexOf(" ") == -1 && potentialLink.indexOf("\n") == -1) {
                 toReturn.add(potentialLink);
-                System.out.println(toReturn.size());
                 currentIndex = closeParen + 1;
             }
             else {
