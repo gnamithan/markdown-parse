@@ -84,6 +84,7 @@ public class MarkdownParse {
             }
             System.out.println("counter: " + counter);
         }
+        System.out.println(toReturn);;
         return toReturn;
     }
     public static void main(String[] args) throws IOException {
