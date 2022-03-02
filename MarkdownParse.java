@@ -31,12 +31,9 @@ public class MarkdownParse {
     }
     public static Map<String, List<String>> getLinks(File dirOrFile) throws IOException {
         Map<String, List<String>> result = new HashMap<>();
-        int counter = 0;
         if(dirOrFile.isDirectory()) {
             for(File f: dirOrFile.listFiles()) {
                 result.putAll(getLinks(f));
-                counter = counter + 1;
-                System.out.println(counter);
 
             }
             return result;
@@ -58,8 +55,8 @@ public class MarkdownParse {
         // the next )
         int currentIndex = 0;
         int counter = 0;
-        boolean linkYes = false;
         while(currentIndex < markdown.length()) {
+            counter++;
             int nextOpenBracket = markdown.indexOf("[", currentIndex);
             int nextCodeBlock = markdown.indexOf("\n```");
             if(nextCodeBlock < nextOpenBracket && nextCodeBlock != -1) {
@@ -80,15 +77,11 @@ public class MarkdownParse {
             String potentialLink = markdown.substring(openParen + 1, closeParen).trim();
             if(potentialLink.indexOf(" ") == -1 && potentialLink.indexOf("\n") == -1) {
                 toReturn.add(potentialLink);
-                linkYes = true;
                 currentIndex = closeParen + 1;
             }
             else {
                 currentIndex = currentIndex + 1;
             }
-        }
-        if(linkYes == true){
-            counter = counter + 1;
         }
         System.out.println("Counter: " + counter);
         return toReturn;
