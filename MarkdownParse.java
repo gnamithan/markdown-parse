@@ -33,7 +33,6 @@ public class MarkdownParse {
         Map<String, List<String>> result = new HashMap<>();
         if(dirOrFile.isDirectory()) {
             for(File f: dirOrFile.listFiles()) {
-                System.out.println(result);
                 result.putAll(getLinks(f));
             }
             return result;
@@ -54,6 +53,7 @@ public class MarkdownParse {
         // find the next [, then find the ], then find the (, then take up to
         // the next )
         int currentIndex = 0;
+        int counter = 0;
         while(currentIndex < markdown.length()) {
             int nextOpenBracket = markdown.indexOf("[", currentIndex);
             int nextCodeBlock = markdown.indexOf("\n```");
@@ -75,21 +75,22 @@ public class MarkdownParse {
             String potentialLink = markdown.substring(openParen + 1, closeParen).trim();
             if(potentialLink.indexOf(" ") == -1 && potentialLink.indexOf("\n") == -1) {
                 toReturn.add(potentialLink);
+                counter = counter + 1;
                 currentIndex = closeParen + 1;
             }
             else {
                 currentIndex = currentIndex + 1;
             }
         }
-        System.out.println(toReturn.size());
+        System.out.println(counter);
         return toReturn;
     }
     public static void main(String[] args) throws IOException {
-        Map<String, List<String>> links = getLinks(new File("test-files/"));
-        System.out.println(links);
-        /* Path fileName = Path.of(args[0]);
+        Map<String, List<String>> link = getLinks(new File("test-files/"));
+        System.out.println(link);
+        Path fileName = Path.of(args[0]);
         String contents = Files.readString(fileName);
         ArrayList<String> links = getLinks(contents);
-        System.out.println(links); */
+        System.out.println(links); 
     }
 }
