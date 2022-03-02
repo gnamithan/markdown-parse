@@ -84,7 +84,8 @@ public class MarkdownParse {
         return toReturn;
     }
     public static void main(String[] args) throws IOException {
-        getLinks(new File("test-files/"));
+        Map<String, List<String>> links = getLinks(new File("test-files/"));
+        System.out.println(links);
         /* Path fileName = Path.of(args[0]);
         String contents = Files.readString(fileName);
         ArrayList<String> links = getLinks(contents);
