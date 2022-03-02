@@ -58,6 +58,7 @@ public class MarkdownParse {
         // the next )
         int currentIndex = 0;
         int counter = 0;
+        boolean linkYes = false;
         while(currentIndex < markdown.length()) {
             int nextOpenBracket = markdown.indexOf("[", currentIndex);
             int nextCodeBlock = markdown.indexOf("\n```");
@@ -79,15 +80,17 @@ public class MarkdownParse {
             String potentialLink = markdown.substring(openParen + 1, closeParen).trim();
             if(potentialLink.indexOf(" ") == -1 && potentialLink.indexOf("\n") == -1) {
                 toReturn.add(potentialLink);
-                counter = counter + 1;
-                System.out.println("Counter: " + toReturn.size());
+                linkYes = true;
                 currentIndex = closeParen + 1;
             }
             else {
                 currentIndex = currentIndex + 1;
             }
         }
-        System.out.println(toReturn);
+        if(linkYes == true){
+            counter = counter + 1;
+        }
+        System.out.println("Counter: " + counter);
         return toReturn;
     }
     public static void main(String[] args) throws IOException {
