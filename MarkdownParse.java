@@ -83,9 +83,11 @@ public class MarkdownParse {
             else {
                 currentIndex = currentIndex + 1;
             }
-            System.out.println("counter: " + counter);
+            if(counter == 1){
+                System.out.println("counter: " + counter);
+            }
         }
-        System.out.println(toReturn);;
+        System.out.println("final: " + counter);;
         return toReturn;
     }
     public static void main(String[] args) throws IOException {
