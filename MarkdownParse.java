@@ -34,7 +34,7 @@ public class MarkdownParse {
         if(dirOrFile.isDirectory()) {
             for(File f: dirOrFile.listFiles()) {
                 result.putAll(getLinks(f));
-                System.out.println(result);
+                System.out.println(result.size());
 
             }
             return result;
