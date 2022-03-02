@@ -34,6 +34,7 @@ public class MarkdownParse {
         if(dirOrFile.isDirectory()) {
             for(File f: dirOrFile.listFiles()) {
                 result.putAll(getLinks(f));
+                System.out.println(result.size());
             }
             return result;
         }
@@ -87,10 +88,10 @@ public class MarkdownParse {
     }
     public static void main(String[] args) throws IOException {
         Map<String, List<String>> link = getLinks(new File("test-files/"));
-        System.out.println(link);
+        //System.out.println(link);
         Path fileName = Path.of(args[0]);
         String contents = Files.readString(fileName);
         ArrayList<String> links = getLinks(contents);
-        System.out.println(links.size()); 
+        //System.out.println(links.size()); 
     }
 }
