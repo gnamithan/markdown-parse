@@ -34,7 +34,6 @@ public class MarkdownParse {
         if(dirOrFile.isDirectory()) {
             for(File f: dirOrFile.listFiles()) {
                 result.putAll(getLinks(f));
-                //System.out.println("Result: " + result.size());
             }
             return result;
         }
@@ -77,7 +76,7 @@ public class MarkdownParse {
             if(potentialLink.indexOf(" ") == -1 && potentialLink.indexOf("\n") == -1) {
                 toReturn.add(potentialLink);
                 counter = counter + 1;
-                System.out.println("Counter: " + counter);
+                System.out.println("Counter: " + toReturn.size());
                 currentIndex = closeParen + 1;
             }
             else {
