@@ -6,51 +6,40 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
 
-
-//javac -cp .:lib/junit-4.13.2.jar:lib/hamcrest-core-1.3.jar MarkdownParseTest.java
-//java -cp .:lib/junit-4.13.2.jar:lib/hamcrest-core-1.3.jar org.junit.runner.JUnitCore MarkdownParseTest
 public class MarkdownParseTest {
     @Test
     public void testFile1() throws IOException {
-        String contentsTest3 = Files.readString(Path.of("test3.md"));
-        assertEquals(List.of("[this title text is really long and takes up more than one line", 
-                    "and has some line breaks]( https://www.twitter.com )",
-                     "this title text is really long and takes up more than one line",
-                     "[this link doesn't have a closing parenthesis](github.com",
-                     "And there's still some more text after that.",
-                     "[this link doesn't have a closing parenthesis for a while](https://cse.ucsd.edu/",
-                      ")",
-                     "And then there's more text"), 
-            MarkdownParse.getLinks(contentsTest3));
+        String contents= Files.readString(Path.of("./test-file.md"));
+        List<String> expect = List.of("https://something.com", "some-page.html");
+        assertEquals(MarkdownParse.getLinks(contents), expect);
     }
-
-
-
-
-
-
+    
+    @Test
+    public void testFile2() throws IOException {
+        String contents= Files.readString(Path.of("./test-file2.md"));
+        List<String> expect = List.of("https://something.com", "some-page.html");
+        assertEquals(MarkdownParse.getLinks(contents), expect);
+    }
 
     @Test
-    public void addition() throws IOException {
-        // assertEquals(2, 1 + 1);
-
-        //String contentsTest = Files.readString(Path.of("test-file.md"));
-        //String contentsTest1 = Files.readString(Path.of("test1.md"));
-        //String contentsTest2 = Files.readString(Path.of("test2.md"));
-        //String contentsTest3 = Files.readString(Path.of("test3.md"));
-
-        //assertEquals(List.of("[a link](url.com)", "another link`", "cod[e" , "code]"), 
-            //MarkdownParse.getLinks(contentsTest1));
-        /* assertEquals(List.of("[a nested link](b.com)", "a nested parenthesized url", "some escaped [ brackets ]"), 
-            MarkdownParse.getLinks(contentsTest2));
-        assertEquals(List.of("[this title text is really long and takes up more than one line", 
-                    "and has some line breaks]( https://www.twitter.com )",
-                     "this title text is really long and takes up more than one line",
-                     "[this link doesn't have a closing parenthesis](github.com",
-                     "And there's still some more text after that.",
-                     "[this link doesn't have a closing parenthesis for a while](https://cse.ucsd.edu/",
-                      ")",
-                     "And then there's more text"), 
-            MarkdownParse.getLinks(contentsTest3)); */
+    public void testMissingCloseParen() {
+        String contents= "[link title](a.com";
+        List<String> expect = List.of();
+        assertEquals(MarkdownParse.getLinks(contents), expect);
     }
+
+    @Test
+    public void testSpaceAroundLink() {
+        String contents= "[link title](   a.com   )";
+        List<String> expect = List.of("a.com");
+        assertEquals(expect, MarkdownParse.getLinks(contents));
+    }
+
+    @Test
+    public void testNestedParens() throws IOException {
+        String contents = Files.readString(Path.of("test-parens-inside-link.md"));
+        List<String> expect = List.of("something.com()", "something.com((()))", "something.com", "boring.com");
+        assertEquals(expect, MarkdownParse.getLinks(contents));
+    }
+
 }
