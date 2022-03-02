@@ -36,6 +36,7 @@ public class MarkdownParse {
             for(File f: dirOrFile.listFiles()) {
                 result.putAll(getLinks(f));
                 counter = counter + 1;
+                System.out.println(counter);
 
             }
             return result;
@@ -86,7 +87,7 @@ public class MarkdownParse {
                 currentIndex = currentIndex + 1;
             }
         }
-        System.out.println(counter);
+        System.out.println(toReturn);
         return toReturn;
     }
     public static void main(String[] args) throws IOException {
