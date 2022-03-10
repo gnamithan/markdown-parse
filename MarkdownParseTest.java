@@ -10,7 +10,7 @@ public class MarkdownParseTest {
     @Test
     public void testFile1() throws IOException {
         String contents= Files.readString(Path.of("./test-file.md"));
-        List<String> expect = List.of("https://something.com", "some-page.html");
+        List<String> expect = List.of("![foo]");
         assertEquals(MarkdownParse.getLinks(contents), expect);
     }
     
@@ -42,11 +42,6 @@ public class MarkdownParseTest {
         assertEquals(expect, MarkdownParse.getLinks(contents));
     }
 
-    @Test
-    public void testbug1() throws IOException {
-        String contents = Files.readString(Path.of("test-files\591.md"));
-        List<String> expect = List.of("![foo]");
-        assertEquals(expect, MarkdownParse.getLinks(contents));
-    }
+    
 
 }

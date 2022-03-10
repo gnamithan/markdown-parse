@@ -1,4 +1,3 @@
-# Title
+!\[foo]
 
-[a link!](https://something.com)
-[another link!](some-page.html)
+[foo]: /url "title"
