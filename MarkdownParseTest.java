@@ -11,7 +11,7 @@ public class MarkdownParseTest {
     public void testFile1() throws IOException {
         String contents= Files.readString(Path.of("./test-file.md"));
         List<String> expect = List.of("![foo]");
-        assertEquals(MarkdownParse.getLinks(contents), expect);
+        assertEquals(expect, MarkdownParse.getLinks(contents));
     }
     
     @Test
