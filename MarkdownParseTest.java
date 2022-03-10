@@ -17,7 +17,7 @@ public class MarkdownParseTest {
     @Test
     public void testFile2() throws IOException {
         String contents= Files.readString(Path.of("./test-file2.md"));
-        List<String> expect = List.of("**");
+        List<String> expect = List.of("Multiple spaces");
         assertEquals(expect, MarkdownParse.getLinks(contents));
     }
 
